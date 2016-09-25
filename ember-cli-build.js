@@ -5,7 +5,10 @@ var nodeSass = require('node-sass'); // loads the version in your package.json
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    // Add options here
+    dotEnv: {
+      clientAllowedKeys: ['WORDS_KEY']
+    },
+
     sassOptions: {
       includePaths: [
         'bower_components/materialize/sass'
