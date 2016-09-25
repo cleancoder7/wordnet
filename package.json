@@ -1,6 +1,6 @@
 {
   "name": "wordnet",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An app for visualizing networks between related words.",
   "private": true,
   "directories": {
