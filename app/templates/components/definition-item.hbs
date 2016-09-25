@@ -1,0 +1,32 @@
+<p class="definition">{{model.definition}}</p>
+
+{{#if model.examples}}
+<div class="examples">
+  {{#each model.examples as |example|}}
+    <p class="example">{{example}}</p>
+  {{/each}}
+</div>
+{{/if}}
+
+{{#if model.synonyms}}
+  <div class="related">
+    <span class="title">Synonyms:</span>
+    {{#each model.synonyms as |word|}}
+      <span class="word-link">
+        {{#link-to 'word' word}}{{word}}{{/link-to}}
+      </span>
+    {{/each}}
+  </div>
+{{/if}}
+
+
+{{#if model.antonyms}}
+  <div class="related">
+    <span class="title">Synonyms:</span>
+    {{#each model.antonyms as |word|}}
+      <span class="word-link">
+        {{#link-to 'word' word}}{{word}}{{/link-to}}
+      </span>
+    {{/each}}
+  </div>
+{{/if}}
