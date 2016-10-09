@@ -1,65 +1,27 @@
 import Ember from 'ember';
-import {
-  event,
-  select,
-  selectAll
-} from 'd3-selection';
+import { hierarchy } from 'd3-hierarchy';
+import { event, select, selectAll } from 'd3-selection';
+import { zoom } from 'd3-zoom';
 
-import {
-  hierarchy
-} from 'd3-hierarchy';
+const {
+  Component,
+  computed,
+  isEmpty,
+} = Ember;
 
-import {
-  zoom
-} from 'd3-zoom';
-
-
-export default Ember.Component.extend({
+export default Component.extend({
 
   classNames: ['definition-tree'],
 
+  childrenData: computed('model.parents', 'model.children', function() {
+    return this.get('model.children').map((word, i) => ({
+      word: word,
+      x: this.getXCoords('children'),
+      y: this.getYCoords('children', i)
+    }));
+  }),
 
-  getPathCoords(type, x, y) {
-    let bezierX = (this.getXCoords(type) + this.getXCoords('self')) / 2;
-
-    return `M${this.getXCoords('self')},${this.element.offsetHeight / 2}
-      S${bezierX},${y}
-        ${x},${y}`;
-  },
-
-  getYCoords(type, index) {
-    const mid = Math.floor(this.get(`model.${type}`).length / 2);
-    const dist = Math.abs(index - mid);
-
-    let y = this.element.offsetHeight / 2;
-    if (index < mid) {
-      y -= dist * 25;
-    } else if (index > mid) {
-      y += dist * 25;
-    }
-
-    return y;
-  },
-
-  getXCoords(type) {
-    switch (type) {
-    case 'parents':
-      return this.element.offsetWidth * 0.2;
-    case 'self':
-      if (Ember.isEmpty(this.get('parentsData'))) {
-          return this.element.offsetWidth * 0.2;
-        } else if (Ember.isEmpty(this.get('childrenData'))) {
-          return this.element.offsetWidth * 0.8;
-        } else {
-          return this.element.offsetWidth * 0.5;
-        }
-    case 'children':
-      return this.get('parentsData').length > 0 ? this.element.offsetWidth * 0.8 : this.element.offsetWidth * 0.6;
-    }
-  },
-
-
-  parentsData: Ember.computed('model.parents', 'model.children', function() {
+  parentsData: computed('model.parents', 'model.children', function() {
     return this.get('model.parents').map((word, i) => ({
       word: word,
       x: this.getXCoords('parents'),
@@ -67,13 +29,67 @@ export default Ember.Component.extend({
     }));
   }),
 
-  childrenData: Ember.computed('model.parents', 'model.children', function() {
-    return this.get('model.children').map((word, i) => ({
-      word: word,
-      x: this.getXCoords('children'),
-      y: this.getYCoords('children', i)
-    }));
-  }),
+  // Returns the equation for the path linking parent/child nodes to the center node
+  getPathCoords(type, x, y) {
+    // links start at the center
+    const start = {
+      x: this.getXCoords('self'),
+      y: this.getYCoords('self')
+    };
+
+    // bezier point is halfway between the center and node
+    const bezier = {
+      x: (this.getXCoords(type) + this.getXCoords('self')) / 2,
+      y: y
+    };
+
+    // links end at the node's coordinates
+    const final = {
+      x: x,
+      y: y
+    };
+
+    return `M ${start.x}, ${start.y}
+            S ${bezier.x}, ${bezier.y}
+              ${final.x},${final.y}`;
+  },
+
+  getXCoords(type) {
+    const width = this.element.offsetWidth;
+
+    switch (type) {
+    case 'parents':
+      return width * 0.2;
+    case 'self':
+      if (isEmpty(this.get('parentsData'))) {
+        return width * 0.2;
+      } else if (isEmpty(this.get('childrenData'))) {
+        return width * 0.8;
+      } else {
+        return width * 0.5;
+      }
+    case 'children':
+      return isEmpty(this.get('parentsData')) ? width * 0.6 : width * 0.8;
+    }
+  },
+
+  getYCoords(type, index) {
+    let y = this.element.offsetHeight / 2;
+
+    if (type === 'self') {
+      return y;
+    } else {
+      const mid = Math.floor(this.get(`model.${type}`).length / 2);
+      const dist = Math.abs(index - mid);
+
+      if (index < mid) {
+        y -= dist * 25;
+      } else if (index > mid) {
+        y += dist * 25;
+      }
+      return y;
+    }
+  },
 
   didRender() {
     const _this = this;
@@ -88,11 +104,18 @@ export default Ember.Component.extend({
       }))
       .select('.zoom');
 
-
     // Create links and nodes for parents
     const parentsLinks = svg.select('.parents-links')
       .selectAll('.link')
       .data(parents);
+
+    parentsLinks.exit()
+      .remove();
+
+    parentsLinks
+      .attr('d', function(d) {
+        return _this.getPathCoords('parents', d.x, d.y);
+      });
 
     // add links for new parents data
     parentsLinks.enter()
@@ -101,10 +124,6 @@ export default Ember.Component.extend({
       .attr('d', function(d) {
         return _this.getPathCoords('parents', d.x, d.y);
       });
-
-    // remove existing parent links
-    parentsLinks.exit()
-      .remove();
 
     // place parent nodes in appropriate positions
     svg.select('.parents-nodes')
@@ -116,11 +135,19 @@ export default Ember.Component.extend({
         .attr('dy', '0.35rem')
         .attr('dx', '-1rem');
 
-
     // Create links and nodes for children
     const childrenLinks = svg.select('.children-links')
       .selectAll('.link')
       .data(children);
+
+    // remove existing children links
+    childrenLinks.exit()
+      .remove();
+
+    childrenLinks
+      .attr('d', function(d) {
+        return _this.getPathCoords('children', d.x, d.y);
+      });
 
     // add links for new children data
     childrenLinks.enter()
@@ -129,10 +156,6 @@ export default Ember.Component.extend({
       .attr('d', function(d) {
         return _this.getPathCoords('children', d.x, d.y);
       });
-
-    // remove existing children links
-    childrenLinks.exit()
-      .remove();
 
     // place children nodes in appropriate positions
     svg.select('.children-nodes')
@@ -144,45 +167,10 @@ export default Ember.Component.extend({
         .attr('dy', '0.35rem')
         .attr('dx', '1rem');
 
-
+    // place the self node
     svg.select('.self-node')
-      .attr('transform', function(d, i) {
-        return `translate(${ _this.getXCoords('self') }, ${_this.element.offsetHeight * 0.5})`;
+      .attr('transform', function() {
+        return `translate(${ _this.getXCoords('self') }, ${_this.getYCoords('self')})`;
       });
   },
-
-  model: {
-    parents: [
-    'automotive vehicle',
-    'motor vehicle'
-  ],
-
-    children: [
-    'cruiser',
-    'ambulance',
-    'beach waggon',
-    'beach wagon',
-    'bus',
-    'tourer',
-    'touring car',
-    'two-seater',
-    'used-car', 'beach wagon',
-    'bus',
-    'tourer',
-    'touring car',
-    'two-seater',
-    'used-car', 'beach wagon',
-    'bus',
-    'tourer',
-    'touring car',
-    'two-seater',
-    'used-car', 'beach wagon',
-    'bus',
-    'tourer',
-    'touring car',
-    'two-seater',
-    'used-car',
-    'waggon',
-    'wagon'
-  ]}
 });
