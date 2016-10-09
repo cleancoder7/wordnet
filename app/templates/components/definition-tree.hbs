@@ -1,0 +1,37 @@
+<svg>
+  <g class="zoom">
+    <g class="parents-links"></g>
+    <g class="children-links"></g>
+
+    <g class="parents-nodes">
+      {{#each model.parents as |word index|}}
+        <g class="node">
+          <circle r="6"></circle>
+          {{#link-to 'word' word tagName='text' dy="3"}}{{word}}{{/link-to}}
+        </g>
+      {{/each}}
+    </g>
+
+    <g class="children-nodes">
+      {{#each model.children as |word index|}}
+        <g class="node">
+          <circle r="6"></circle>
+          {{#link-to 'word' word tagName='text'}}{{word}}{{/link-to}}
+        </g>
+      {{/each}}
+    </g>
+
+    <g class="self-node">
+      {{#if model.parents}}
+        <text class="parent-label" dx="-20" dy="5">← {{model.parentsLabel}}</text>
+      {{/if}}
+
+      {{#if model.children}}
+        <text class="child-label" dx="20" dy="5">{{model.childrenLabel}} →</text>
+      {{/if}}
+
+      <circle r="8"></circle>
+      <text class="self-label" dy="2rem">{{model.word}}</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,104 @@
+.definition-card {
+  border-left: 10px solid;
+
+  &.adjective {
+    border-color: color('purple', 'lighten-1');
+  }
+  &.adverb {
+    border-color: color('indigo', 'lighten-1');
+  }
+  &.definite-article {
+    border-color: color('orange', 'lighten-1');
+  }
+  &.conjunction {
+    border-color: color('brown', 'lighten-1');
+  }
+  &.noun {
+    border-color: color('cyan', 'base');
+  }
+  &.preposition {
+    border-color: color('light-green', 'lighten-1');
+  }
+  &.pronoun {
+    border-color: color('red', 'lighten-1');
+  }
+  &.verb {
+    border-color: color('green', 'lighten-1');
+  }
+
+  .definition-header {
+    @extend h3;
+    text-align: center;
+  }
+
+  .definition-attributes {
+    @extend .row;
+    text-align: center;
+    span {
+      @extend .col;
+      @extend .s4;
+      font-size: 1.2rem;
+      padding: 0 1rem;
+    }
+    .part-of-speech {
+      text-align: right;
+    }
+    .pronunciation {
+      text-align: left;
+    }
+  }
+
+
+  ol.definition-list {
+    counter-reset: item;
+    margin-left: 0;
+    padding-left: 0;
+
+    li.definition-item {
+      display: block;
+      padding: 1rem 2rem;
+      border-radius: 2px;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #eee;
+      }
+
+      &:before {
+        // custom numbering
+        float: left;
+        content: counter(item) ".";
+        margin-left: -1.5rem;
+        counter-increment: item;
+        color: grey;
+      }
+
+      .definition {
+        margin-bottom: 0.5rem;
+      }
+
+      .examples {
+        color: grey;
+        font-style: italic;
+        &:before {
+          content: 'e.g.';
+          float: left;
+        }
+        .example {
+          padding-left: 2rem;
+        }
+      }
+
+      .related {
+        .small {
+          font-size: 0.8rem;
+          color: grey;
+        }
+        .word-link:not(:last-child):after {
+          // add comma after each word
+          content: ',';
+          margin-left: -3px;
+        }
+      }
+    }
+  }
+}
