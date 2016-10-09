@@ -19,7 +19,6 @@
   </div>
 {{/if}}
 
-
 {{#if model.antonyms}}
   <div class="related">
     <span class="title">Antonyms:</span>
@@ -29,4 +28,20 @@
       </span>
     {{/each}}
   </div>
+{{/if}}
+
+
+{{#if validGraphTypes}}
+  <div class="related">
+    <span class="title">Relationships <span class="small">(click to visualize)</span>:</span>
+    {{#each validGraphTypes as |type|}}
+      <a class="word-link" {{action 'selectGraphType' type}}>
+        {{type.name}}
+      </a>
+    {{/each}}
+  </div>
+{{/if}}
+
+{{#if selectedGraphType}}
+  {{definition-tree model=selectedGraphType}}
 {{/if}}

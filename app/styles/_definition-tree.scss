@@ -1,0 +1,68 @@
+.definition-tree {
+  width: 100%;
+  min-width: 300px;
+  height: 300px;
+}
+
+
+.node {
+  circle {
+    fill: #fff;
+    stroke: color('blue', 'lighten-1');
+    stroke-width: 1px;
+  }
+
+  text {
+    font-size: 1rem;
+    transition: font-size 0.2s;
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    circle {
+      fill: color('blue', 'lighten-3');
+    }
+
+    text {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.parents-nodes {
+  text {
+    text-anchor: end;
+  }
+}
+
+.children-nodes {
+  text {
+    text-anchor: start;
+  }
+}
+
+.self-node {
+  circle {
+    fill: color('blue', 'lighten-1');
+  }
+  text.self-label {
+    font-size: 1.5rem;
+    text-anchor: middle;
+  }
+  text.parent-label {
+    text-anchor: end;
+  }
+  text.child-label {
+    text-anchor: start;
+  }
+}
+
+path {
+  z-index: 0;
+  fill: none;
+  stroke: #ddd;
+  stroke-opacity: 0.4;
+  stroke-width: 1.5px;
+}
+
