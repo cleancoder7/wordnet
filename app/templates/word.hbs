@@ -1,11 +1,14 @@
 {{search-box word=model.word submit=(route-action 'searchWord')}}
 
 {{#each-in groupedDefinitions as |partOfSpeech definitions|}}
-  {{definition-card definitions=definitions}}
+  {{definition-card
+    word=model
+    partOfSpeech=partOfSpeech
+    definitions=definitions
+  }}
 {{else}}
-  {{#md-card title='Error' class='error'}}
-    {{#md-card-content}}
-      Word not found.
-    {{/md-card-content}}
-  {{/md-card}}
+  <div class="card error">
+    <h1>Error</h1>
+    <p>Word not found.</p>
+  </div>
 {{/each-in}}
