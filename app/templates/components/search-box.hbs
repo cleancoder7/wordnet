@@ -1,5 +1,8 @@
-{{md-input value=value
+{{paper-input
+  class="search"
   label="Search for a word..."
-  icon="search light-blue-text"
-  class="col s12"
-  validate=true}}
+  value=value
+  onChange=(action (mut value))
+  icon="search"
+  hideAllMessages=true
+}}

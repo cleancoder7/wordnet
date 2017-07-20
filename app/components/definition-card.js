@@ -1,40 +1,36 @@
-import Ember from 'ember';
-const {
-  Component,
-  computed,
-  isBlank
-} = Ember;
+import Ember from 'ember'
+const { Component, computed, get, isBlank } = Ember
 
 export default Component.extend({
+  // Default properties
+
+  classNames: ['card'],
+
+  classNameBindings: ['cssClass'],
+
+  tagName: 'div',
+
+  // Computed properties
 
   cssClass: computed('partOfSpeech', function() {
-    return `definition-card ${this.get('partOfSpeech').dasherize()}`;
-  }),
-
-  partOfSpeech: computed('definitions', function() {
-    return this.get('definitions.firstObject.partOfSpeech');
+    return `definition-card ${get(this, 'partOfSpeech').dasherize()}`
   }),
 
   pronunciation: computed('word', 'partOfSpeech', function() {
-    const pronunciation = this.get('word.pronunciation');
+    const pronunciation = get(this, 'word.pronunciation')
 
     if (typeof pronunciation === 'object') {
-      return `/${pronunciation[this.get('partOfSpeech')] || pronunciation.all}/`;
+      // pronunciation is either an object with keys that describe pronunciations for different parts of speech
+      return `/${pronunciation[get(this, 'partOfSpeech')] || pronunciation.all}/`
     } else {
+      // or it's a string if all parts of speech are pronounced the same
       if (!isBlank(pronunciation)) {
-        return `/${pronunciation}/`;
+        return `/${pronunciation}/`
       }
     }
   }),
 
   syllables: computed('word', function() {
-    return this.get('word.syllables').join('·');
+    return get(this, 'word.syllables').join('·')
   }),
-
-  tagName: '',
-
-  word: computed('definitions', function() {
-    return this.get('definitions.firstObject.word');
-  }),
-
-});
+})

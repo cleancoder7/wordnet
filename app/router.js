@@ -1,12 +1,12 @@
-import Ember from 'ember';
-import config from './config/environment';
+import Ember from 'ember'
+import config from './config/environment'
 
 const Router = Ember.Router.extend({
-  location: config.locationType
-});
+  location: config.locationType,
+})
 
 Router.map(function() {
-  this.route('word', { path: 'word/:word' });
-});
+  this.route('word', { path: 'word/:word' })
+})
 
-export default Router;
+export default Router

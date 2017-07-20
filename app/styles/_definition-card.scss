@@ -1,53 +1,30 @@
 .definition-card {
-  border-left: 10px solid;
-
-  &.adjective {
-    border-color: color('purple', 'lighten-1');
-  }
-  &.adverb {
-    border-color: color('indigo', 'lighten-1');
-  }
-  &.definite-article {
-    border-color: color('orange', 'lighten-1');
-  }
-  &.conjunction {
-    border-color: color('brown', 'lighten-1');
-  }
-  &.noun {
-    border-color: color('cyan', 'base');
-  }
-  &.preposition {
-    border-color: color('light-green', 'lighten-1');
-  }
-  &.pronoun {
-    border-color: color('red', 'lighten-1');
-  }
-  &.verb {
-    border-color: color('green', 'lighten-1');
-  }
+  border-left: $space-s solid;
 
   .definition-header {
-    @extend h3;
+    font-size: 2.2rem;
+    margin-top: $space-l;
+    margin-bottom: $space-m;
     text-align: center;
   }
 
   .definition-attributes {
-    @extend .row;
-    text-align: center;
+    display: flex;
     span {
-      @extend .col;
-      @extend .s4;
       font-size: 1.2rem;
-      padding: 0 1rem;
-    }
-    .part-of-speech {
-      text-align: right;
-    }
-    .pronunciation {
-      text-align: left;
+      flex: 1;
+
+      &.pronunciation {
+        text-align: left;
+      }
+      &.syllables {
+        text-align: center;
+      }
+      &.part-of-speech {
+        text-align: right;
+      }
     }
   }
-
 
   ol.definition-list {
     counter-reset: item;
@@ -56,8 +33,7 @@
 
     li.definition-item {
       display: block;
-      padding: 1rem 2rem;
-      border-radius: 2px;
+      padding: $space-m $space-l;
 
       &:not(:last-child) {
         border-bottom: 1px solid #eee;
@@ -73,22 +49,27 @@
       }
 
       .definition {
-        margin-bottom: 0.5rem;
+        margin: 0;
+        margin-bottom: $space-m;
       }
 
       .examples {
         color: grey;
         font-style: italic;
+        margin-bottom: $space-m;
         &:before {
           content: 'e.g.';
           float: left;
         }
         .example {
-          padding-left: 2rem;
+          padding-left: $space-l;
+          margin: 0;
+          margin-bottom: $space-s;
         }
       }
 
       .related {
+        margin-bottom: $space-s;
         .small {
           font-size: 0.8rem;
           color: grey;
@@ -99,6 +80,48 @@
           margin-left: -3px;
         }
       }
+    }
+  }
+}
+
+// Definitions for each part of speech get distinct colors
+$colormap: (
+  adjective: 'purple',
+  adverb: 'indigo',
+  conjunction: 'brown',
+  definite-article: 'orange',
+  noun: 'red',
+  preposition: 'light-green',
+  pronoun: 'yellow',
+  verb: 'green'
+);
+
+@each $type, $color in $colormap {
+  .definition-card.#{$type} {
+    border-color: color($color);
+
+    a {
+      color: color($color);
+      &:hover {
+        color: color($color, 'A400');
+      }
+    }
+
+    .definition-net {
+      border: 1px dashed color($color);
+      border-radius: $border-radius;
+    }
+    .node {
+      circle {
+        stroke: color($color, 'A400');
+      }
+      &:hover circle {
+        fill: color($color, 'A100');
+      }
+    }
+
+    .self-node circle {
+      fill: color($color);
     }
   }
 }

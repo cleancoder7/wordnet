@@ -1,17 +1,17 @@
-<p class="definition">{{model.definition}}</p>
+<p class="definition">{{definition.definition}}</p>
 
-{{#if model.examples}}
+{{#if definition.examples}}
 <div class="examples">
-  {{#each model.examples as |example|}}
+  {{#each definition.examples as |example|}}
     <p class="example">{{example}}</p>
   {{/each}}
 </div>
 {{/if}}
 
-{{#if model.synonyms}}
+{{#if definition.synonyms}}
   <div class="related">
     <span class="title">Synonyms:</span>
-    {{#each model.synonyms as |word|}}
+    {{#each definition.synonyms as |word|}}
       <span class="word-link">
         {{#link-to 'word' word}}{{word}}{{/link-to}}
       </span>
@@ -19,17 +19,16 @@
   </div>
 {{/if}}
 
-{{#if model.antonyms}}
+{{#if definition.antonyms}}
   <div class="related">
     <span class="title">Antonyms:</span>
-    {{#each model.antonyms as |word|}}
+    {{#each definition.antonyms as |word|}}
       <span class="word-link">
         {{#link-to 'word' word}}{{word}}{{/link-to}}
       </span>
     {{/each}}
   </div>
 {{/if}}
-
 
 {{#if validGraphTypes}}
   <div class="related">
@@ -43,5 +42,5 @@
 {{/if}}
 
 {{#if selectedGraphType}}
-  {{definition-tree model=selectedGraphType}}
+  {{definition-net relationship=selectedGraphType}}
 {{/if}}
