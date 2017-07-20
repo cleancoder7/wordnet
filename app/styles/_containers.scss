@@ -2,12 +2,20 @@ body {
   background-color: #fafafa;
 }
 
+md-toolbar {
+  align-items: center;
+
+  .md-toolbar-tools {
+    max-width: $max-width;
+  }
+}
+
 .container {
   @extend .layout-column;
   align-items: stretch;
 
   width: 100%;
-  max-width: 900px;
+  max-width: $max-width;
 
   margin: $space-l auto;
 }
