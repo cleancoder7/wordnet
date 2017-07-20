@@ -1,12 +1,20 @@
-import Ember from 'ember';
+import Ember from 'ember'
+const { Component, computed, get } = Ember
 
-export default Ember.Component.extend({
+export default Component.extend({
+  // Default properties
+
+  classNames: ['card'],
+
+  // Computed properties
+
+  value: computed.readOnly('word'),
+
+  // Custom methods
+
   keyPress(event) {
     if (event.key === 'Enter') {
-      this.submit(this.get('value'));
+      this.submit(get(this, 'value'))
     }
   },
-  value: Ember.computed.oneWay('word'),
-  classNames: ['card-panel'],
-  tagName: 'div'
-});
+})

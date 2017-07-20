@@ -1,14 +1,13 @@
-.definition-tree {
+.definition-net {
   width: 100%;
   min-width: 300px;
   height: 300px;
 }
 
-
 .node {
   circle {
     fill: #fff;
-    stroke: color('blue', 'lighten-1');
+    stroke: color($accent, '500');
     stroke-width: 1px;
   }
 
@@ -21,7 +20,7 @@
     cursor: pointer;
 
     circle {
-      fill: color('blue', 'lighten-3');
+      fill: color($accent, '300');
     }
 
     text {
@@ -44,7 +43,7 @@
 
 .self-node {
   circle {
-    fill: color('blue', 'lighten-1');
+    fill: color($primary, '500');
   }
   text.self-label {
     font-size: 1.5rem;
@@ -65,4 +64,3 @@ path {
   stroke-opacity: 0.4;
   stroke-width: 1.5px;
 }
-

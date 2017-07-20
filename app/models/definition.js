@@ -1,17 +1,10 @@
-import Data from 'ember-data';
-const {
-  attr,
-  belongsTo,
-  Model
-} = Data;
-
+import Data from 'ember-data'
+const { attr, belongsTo, Model } = Data
 
 export default Model.extend({
-  word: belongsTo('word', { inverse: 'definitions' }),
-
-  definition: attr(),
+  definition: attr('string'),
   examples: attr(),
-  partOfSpeech: attr(),
+  partOfSpeech: attr('string'),
 
   synonyms: attr(),
   similarTo: attr(),
@@ -44,4 +37,6 @@ export default Model.extend({
 
   usageOf: attr(),
   hasUsages: attr(),
-});
+
+  word: belongsTo('word', { inverse: 'definitions' }),
+})

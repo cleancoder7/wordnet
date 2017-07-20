@@ -1,9 +1,10 @@
-import Ember from 'ember';
+import Ember from 'ember'
+const { Route } = Ember
 
-export default Ember.Route.extend({
+export default Route.extend({
   actions: {
     searchWord(word) {
-      this.transitionTo('word', word);
-    }
-  }
-});
+      this.transitionTo('word', word)
+    },
+  },
+})
