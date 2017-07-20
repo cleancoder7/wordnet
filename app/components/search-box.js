@@ -8,7 +8,7 @@ export default Component.extend({
 
   // Computed properties
 
-  value: computed.readOnly('word'),
+  value: computed.oneWay('word'),
 
   // Custom methods
 
