@@ -1,12 +1,10 @@
 @import 'variables';
 @import 'ember-paper';
 
-@import 'containers',
-  'definition-card',
-  'definition-tree';
+@import 'containers', 'definition-card', 'definition-net';
 
-
-[data-ember-action]:not(:disabled), a {
+[data-ember-action]:not(:disabled),
+a {
   cursor: pointer;
   color: color($primary);
   text-decoration: none;

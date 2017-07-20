@@ -107,7 +107,7 @@ $colormap: (
       }
     }
 
-    .definition-tree {
+    .definition-net {
       border: 1px dashed color($color);
       border-radius: $border-radius;
     }
@@ -115,7 +115,7 @@ $colormap: (
       circle {
         stroke: color($color, 'A400');
       }
-      &:hover circle{
+      &:hover circle {
         fill: color($color, 'A100');
       }
     }

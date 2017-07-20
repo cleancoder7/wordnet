@@ -1,13 +1,14 @@
-import Ember from 'ember';
+import Ember from 'ember'
+const { $, Route } = Ember
 
-export default Ember.Route.extend({
-  actions: {
-    didTransition() {
-      Ember.$('html, body').animate({ scrollTop: 0 });
-    }
+export default Route.extend({
+  model(params) {
+    return this.store.queryRecord('word', { word: params.word })
   },
 
-  model(params) {
-    return this.store.findRecord('word', params.word);
-  }
-});
+  actions: {
+    didTransition() {
+      $('html, body').animate({ scrollTop: 0 })
+    },
+  },
+})
