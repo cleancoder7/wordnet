@@ -1,11 +1,11 @@
 {
   "name": "wordnet",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "Small description for wordnet goes here",
+  "description": "An app for visualizing networks between related words.",
   "repository": "",
   "license": "MIT",
-  "author": "",
+  "author": "Wahhaj Ali <wahhaj@wahhajali.com>",
   "directories": {
     "doc": "doc",
     "test": "tests"
