@@ -3725,6 +3725,13 @@ ember-test-waiters@^1.0.0:
   dependencies:
     ember-cli-babel "^7.1.2"
 
+ember-uuid@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ember-uuid/-/ember-uuid-2.0.0.tgz#e4feeff539d4915e426bf5ca25d1207b729c0d54"
+  integrity sha512-Sr48Qri/zaLbVJ9mH4V03KprI7ESGVZJSdzxbLo3l8CmiO4Tj89/Gp7M/knLKDz/ZPHoGWx/7bLaLt8WmHNkfA==
+  dependencies:
+    ember-cli-babel "^7.7.3"
+
 emoji-regex@^7.0.1:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-7.0.3.tgz#933a04052860c85e83c122479c4748a8e4c72156"
