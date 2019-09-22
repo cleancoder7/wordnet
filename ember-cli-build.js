@@ -17,6 +17,10 @@ const purgeCSS = {
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
+    dotEnv: {
+      clientAllowedKeys: ["API_KEY"]
+    },
+
     postcssOptions: {
       compile: {
         plugins: [
