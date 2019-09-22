@@ -1,0 +1,31 @@
+<p>{{definition.definition}}</p>
+
+{{#if definition.examples}}
+  <div>
+    {{#each definition.examples as |example|}}
+      <p>{{example}}</p>
+    {{/each}}
+  </div>
+{{/if}}
+
+{{#if definition.synonyms}}
+  <div>
+    <span>Synonyms:</span>
+    {{#each definition.synonyms as |word|}}
+      <span>
+        <LinkTo @route="word" @model={{word}}>{{word}}</LinkTo>
+      </span>
+    {{/each}}
+  </div>
+{{/if}}
+
+{{#if definition.antonyms}}
+  <div>
+    <span>Antonyms:</span>
+    {{#each definition.antonyms as |word|}}
+      <span>
+        <LinkTo @route="word" @model={{word}}>{{word}}</LinkTo>
+      </span>
+    {{/each}}
+  </div>
+{{/if}}

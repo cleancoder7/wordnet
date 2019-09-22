@@ -1,0 +1,11 @@
+<h1>{{word.id}}</h1>
+
+<div>
+  <span>{{partOfSpeech}}</span>
+  <span>{{syllables}}</span>
+  <span>{{pronunciation}}</span>
+</div>
+
+{{#each definitions as |definition|}}
+  <Definition::Item @definition={{definition}} />
+{{/each}}
