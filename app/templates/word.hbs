@@ -1,1 +1,5 @@
-{{outlet}}
+<SearchBox @value={{model.id}}></SearchBox>
+
+{{#each-in model.definitionsByPartOfSpeech as |partOfSpeech definitions|}}
+  <Definition::Card @word={{model}} @partOfSpeech={{partOfSpeech}} @definitions={{definitions}} />
+{{/each-in}}
