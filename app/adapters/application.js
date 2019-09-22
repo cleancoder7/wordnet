@@ -5,9 +5,11 @@ import { computed } from "@ember/object"
 export default RESTAdapter.extend({
   host: "https://wordsapiv1.p.mashape.com",
 
-  headers: computed(() => ({
-    "X-Mashape-Key": ENV.APP.API_KEY,
-    "Accept": "application/json",
-    "Cache-Control": "public, max-age=86400",
-  })),
+  headers: computed(function() {
+    return {
+      "X-Mashape-Key": ENV.APP.API_KEY,
+      Accept: "application/json",
+      "Cache-Control": "public, max-age=86400",
+    }
+  }),
 })
