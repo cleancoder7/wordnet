@@ -1,9 +1,9 @@
 {
   "name": "wordnet",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": true,
   "description": "An app for visualizing networks between related words.",
-  "repository": "",
+  "repository": "https://github.com/wahhaj/wordnet",
   "license": "MIT",
   "author": "Wahhaj Ali <wahhaj@wahhajali.com>",
   "directories": {
