@@ -23,6 +23,8 @@ export default Component.extend({
         return "yellow"
       case "verb":
         return "green"
+      default:
+        return "gray"
     }
   }),
 
@@ -35,6 +37,8 @@ export default Component.extend({
     } else if (isPresent(pronunciation)) {
       // or it's a string if all parts of speech are pronounced the same
       return `/${pronunciation}/`
+    } else {
+      return ""
     }
   }),
 
