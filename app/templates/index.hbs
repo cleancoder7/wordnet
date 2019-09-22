@@ -1,11 +1,11 @@
 <div class="bg-gray-100 flex flex-col h-screen">
   <nav class="p-4 bg-blue-700">
-    <div class="mx-auto max-w-4xl">
+    <div class="container">
       <LinkTo @route="index" class="text-white text-xl">WordNet</LinkTo>
     </div>
   </nav>
 
-  <div class="flex items-center w-full max-w-xl mx-auto my-8 py-4 px-8 bg-white rounded shadow">
+  <div class="container card my-8">
     <SearchBox @card={{true}}></SearchBox>
   </div>
 </div>

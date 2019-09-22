@@ -2,6 +2,19 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+.container {
+  @apply max-w-4xl;
+  @apply mx-auto;
+  @apply w-full;
+}
+
+.card {
+  @apply bg-white;
+  @apply p-8;
+  @apply rounded;
+  @apply shadow;
+}
+
 /* Add numbers before definitions */
 ol {
   counter-reset: item;

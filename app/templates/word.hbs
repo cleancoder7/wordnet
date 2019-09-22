@@ -1,6 +1,6 @@
 <div class="bg-gray-100 flex flex-col h-screen">
   <nav class="p-4 bg-blue-700">
-    <div class="mx-auto max-w-4xl flex items-center">
+    <div class="container flex items-center">
       <LinkTo @route="index" class="text-white text-xl">WordNet</LinkTo>
       <span class="flex-1"></span>
       <SearchBox @word={{model.id}} @card={{false}} class="w-24"></SearchBox>
@@ -13,7 +13,7 @@
         @word={{model}}
         @partOfSpeech={{partOfSpeech}}
         @definitions={{definitions}}
-        class="max-w-4xl mx-auto mb-4 p-8 bg-white rounded shadow"
+        class="container card mb-4"
       />
     {{/each-in}}
   </div>
