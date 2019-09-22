@@ -1,4 +1,4 @@
-<SearchBox @value={{model.id}}></SearchBox>
+<SearchBox @word={{model.id}} class="mb-8"></SearchBox>
 
 {{#each-in model.definitionsByPartOfSpeech as |partOfSpeech definitions|}}
   <Definition::Card @word={{model}} @partOfSpeech={{partOfSpeech}} @definitions={{definitions}} />
