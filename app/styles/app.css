@@ -1,3 +1,29 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+ol {
+  counter-reset: item;
+}
+
+ol li:before {
+  float: left;
+  content: counter(item) ".";
+  margin-left: -28px;
+  counter-increment: item;
+  @apply text-gray-500;
+}
+
+ol li:not(:last-child) {
+  @apply border-b-2;
+}
+
+div.examples:before {
+  content: 'e.g.';
+  float: left;
+}
+
+span.word-link:not(:last-child):after {
+  content: ",";
+  margin-left: -3px;
+}

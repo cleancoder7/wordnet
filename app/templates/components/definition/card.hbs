@@ -1,11 +1,17 @@
-<h1>{{word.id}}</h1>
+<h1 class="text-4xl text-center mb-2">{{word.id}}</h1>
 
-<div>
-  <span>{{partOfSpeech}}</span>
-  <span>{{syllables}}</span>
-  <span>{{pronunciation}}</span>
+<div class="flex mb-2 text-xl">
+  <span class="flex-1 text-right">{{partOfSpeech}}</span>
+  <span class="flex-1 text-center">{{syllables}}</span>
+  <span class="flex-1 text-left">{{pronunciation}}</span>
 </div>
 
-{{#each definitions as |definition|}}
-  <Definition::Item @definition={{definition}} />
-{{/each}}
+<ol>
+  {{#each definitions as |definition|}}
+    <Definition::Item
+      @definition={{definition}}
+      @color={{color}}
+      class="py-4 px-8"
+    />
+  {{/each}}
+</ol>
