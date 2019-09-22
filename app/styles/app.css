@@ -14,16 +14,7 @@ ol li:before {
   @apply text-gray-500;
 }
 
-ol li:not(:last-child) {
-  @apply border-b-2;
-}
-
 div.examples:before {
   content: 'e.g.';
   float: left;
-}
-
-span.word-link:not(:last-child):after {
-  content: ",";
-  margin-left: -3px;
 }

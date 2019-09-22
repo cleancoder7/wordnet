@@ -1,7 +1,7 @@
-<p class="mb-2">{{definition.definition}}</p>
+<p class={{unless definition.examples "mb-4"}}>{{definition.definition}}</p>
 
 {{#if definition.examples}}
-  <div class="examples italic text-gray-500 mb-2">
+  <div class="examples italic text-gray-500 mb-4">
     {{#each definition.examples as |example|}}
       <p class="pl-8">{{example}}</p>
     {{/each}}
@@ -9,33 +9,29 @@
 {{/if}}
 
 {{#if definition.synonyms}}
-  <div>
+  <div class="mb-2">
     <span>Synonyms:</span>
-    {{#each definition.synonyms as |word index|}}
-      <span class="word-link">
-        <LinkTo
-          @route="word"
-          @model={{word}}
-          @linkTitle={{word}}
-          class="text-{{color}}-500 hover:text-{{color}}-300"
-        />
-      </span>
+    {{#each definition.synonyms as |word|}}
+      <LinkTo
+        @route="word"
+        @model={{word}}
+        @linkTitle={{word}}
+        class="text-{{color}}-500 hover:bg-{{color}}-100 border-{{color}}-200 p-1 border rounded-lg"
+      />
     {{/each}}
   </div>
 {{/if}}
 
 {{#if definition.antonyms}}
-  <div>
+  <div class="mb-2">
     <span>Antonyms:</span>
     {{#each definition.antonyms as |word|}}
-      <span class="word-link">
-        <LinkTo
-          @route="word"
-          @model={{word}}
-          @linkTitle={{word}}
-          class="text-{{color}}-500 hover:text-{{color}}-300"
-        />
-      </span>
+      <LinkTo
+        @route="word"
+        @model={{word}}
+        @linkTitle={{word}}
+        class="text-{{color}}-500 hover:bg-{{color}}-100 border-{{color}}-200 p-1 border rounded-lg"
+      />
     {{/each}}
   </div>
 {{/if}}
