@@ -1,0 +1,19 @@
+<div class="bg-gray-100 flex flex-col h-screen">
+  <nav class="p-4 bg-blue-700">
+    <div class="container">
+      <LinkTo @route="index" class="text-white text-xl">WordNet</LinkTo>
+    </div>
+  </nav>
+
+  <div class="flex-1 overflow-y-auto">
+    <div class="container card my-8">
+      <SearchBox @card={{true}}></SearchBox>
+    </div>
+
+    <div class="container card text-center">
+      <h1 class="text-4xl mb-2">Error</h1>
+      <p>Word not found.</p>
+    </div>
+  </div>
+</div>
+
