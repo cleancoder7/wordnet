@@ -8,21 +8,21 @@ export default Component.extend({
   color: computed("partOfSpeech", function() {
     switch (this.partOfSpeech) {
       case "adjective":
-        return "purple"
-      case "adverb":
-        return "indigo"
-      case "conjunction":
-        return "brown"
-      case "definite-article":
-        return "orange"
-      case "noun":
         return "red"
-      case "preposition":
-        return "light-green"
-      case "pronoun":
+      case "adverb":
+        return "orange"
+      case "conjunction":
         return "yellow"
-      case "verb":
+      case "definite-article":
         return "green"
+      case "noun":
+        return "teal"
+      case "preposition":
+        return "blue"
+      case "pronoun":
+        return "indigo"
+      case "verb":
+        return "purple"
       default:
         return "gray"
     }
