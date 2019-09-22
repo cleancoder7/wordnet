@@ -3,12 +3,7 @@ import { computed } from "@ember/object"
 import { isPresent } from "@ember/utils"
 
 export default Component.extend({
-  classNames: ["border-l-8"],
-  classNameBindings: ["borderColor"],
-
-  borderColor: computed("color", function() {
-    return `border-${this.color}-500`
-  }),
+  tagName: "",
 
   color: computed("partOfSpeech", function() {
     switch (this.partOfSpeech) {

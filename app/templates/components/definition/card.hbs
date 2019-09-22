@@ -1,21 +1,23 @@
-<h1 class="text-4xl text-center mb-2">{{word.id}}</h1>
+<div class="container card mb-4 border-l-8 border-{{color}}-500">
+  <h1 class="text-4xl text-center mb-2">{{word.id}}</h1>
 
-<div class="flex mb-6 text-xl">
-  <span class="flex-1 text-right">{{partOfSpeech}}</span>
-  <span class="flex-1 text-center">{{syllables}}</span>
-  <span class="flex-1 text-left">{{pronunciation}}</span>
+  <div class="flex mb-6 text-xl">
+    <span class="flex-1 text-right">{{partOfSpeech}}</span>
+    <span class="flex-1 text-center">{{syllables}}</span>
+    <span class="flex-1 text-left">{{pronunciation}}</span>
+  </div>
+
+  <ol>
+    {{#each definitions as |definition|}}
+      <Definition::Item
+        @definition={{definition}}
+        @color={{color}}
+        class="mb-4 px-8"
+      />
+
+      {{#if (not (eq definition definitions.lastObject))}}
+        <hr class="mb-4">
+      {{/if}}
+    {{/each}}
+  </ol>
 </div>
-
-<ol>
-  {{#each definitions as |definition|}}
-    <Definition::Item
-      @definition={{definition}}
-      @color={{color}}
-      class="mb-4 px-8"
-    />
-
-    {{#if (not (eq definition definitions.lastObject))}}
-      <hr class="mb-4">
-    {{/if}}
-  {{/each}}
-</ol>
