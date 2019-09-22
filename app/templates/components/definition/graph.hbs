@@ -1,1 +1,49 @@
-{{yield}}
+<svg>
+  <g class="zoom">
+    <g class="parents-links"></g>
+    <g class="children-links"></g>
+
+    <g class="parents-nodes">
+      {{#each data.parents as |word|}}
+        <LinkTo
+          @route="word"
+          @model={{word}}
+          @linkTitle={{word}}
+          @tagName="g"
+          class="node"
+        >
+          <circle r="6" class="text-{{color}}-500"/>
+          <text text-anchor="end">{{word}}</text>
+        </LinkTo>
+      {{/each}}
+    </g>
+
+    <g class="children-nodes">
+      {{#each data.children as |word|}}
+        <LinkTo
+          @route="word"
+          @model={{word}}
+          @linkTitle={{word}}
+          @tagName="g"
+          class="node"
+        >
+          <circle r="6" class="text-{{color}}-500"/>
+          <text text-anchor="start">{{word}}</text>
+        </LinkTo>
+      {{/each}}
+    </g>
+
+    <g class="self-node">
+      {{#if data.parents}}
+        <text dx="-20" dy="5" text-anchor="end">← {{data.parentsLabel}}</text>
+      {{/if}}
+
+      <circle r="8" class="text-{{color}}-500 fill-current" />
+      <text dy="2rem" text-anchor="middle" class="text-2xl">{{data.word}}</text>
+
+      {{#if data.children}}
+        <text dx="20" dy="5" text-anchor="start">{{data.childrenLabel}} →</text>
+      {{/if}}
+    </g>
+  </g>
+</svg>

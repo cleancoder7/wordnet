@@ -35,3 +35,24 @@
     {{/each}}
   </div>
 {{/if}}
+
+{{#if validGraphTypes}}
+  <div class="mb-2">
+    <span>Relationships <span class="text-sm">(click to visualize)</span>:</span>
+    {{#each validGraphTypes as |type|}}
+      <button {{action "selectGraphType" type}}
+        class="cursor-pointer text-{{color}}-500 hover:bg-{{color}}-100 border-{{color}}-200 p-1 border rounded-lg"
+      >
+        {{type.name}}
+      </button>
+    {{/each}}
+  </div>
+{{/if}}
+
+{{#if selectedGraphData}}
+  <Definition::Graph
+    @data={{selectedGraphData}}
+    @color={{color}}
+    class="w-full h-64 border border-dashed border-{{color}}-500 rounded"
+  />
+{{/if}}

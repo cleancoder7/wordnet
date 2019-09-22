@@ -2,10 +2,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+/* Add numbers before definitions */
 ol {
   counter-reset: item;
 }
-
 ol li:before {
   float: left;
   content: counter(item) ".";
@@ -14,7 +14,35 @@ ol li:before {
   @apply text-gray-500;
 }
 
+/* Add e.g. before examples */
 div.examples:before {
   content: 'e.g.';
   float: left;
+}
+
+/* SVG styling */
+.node:hover {
+  cursor: pointer;
+}
+.node text {
+  transition: font-size 0.2s;
+}
+.node:hover text {
+  font-size: 1.1rem;
+}
+.node circle {
+  fill: #fff;
+  stroke-width: 1px;
+  transition: fill 0.2s;
+  @apply stroke-current;
+}
+.node:hover circle {
+  @apply fill-current;
+}
+path {
+  z-index: 0;
+  fill: none;
+  stroke: #cbd5e0;
+  stroke-opacity: 0.4;
+  stroke-width: 1.5px;
 }
