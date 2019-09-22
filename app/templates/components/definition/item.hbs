@@ -1,0 +1,58 @@
+<p class={{unless definition.examples "mb-4"}}>{{definition.definition}}</p>
+
+{{#if definition.examples}}
+  <div class="examples italic text-gray-500 mb-4">
+    {{#each definition.examples as |example|}}
+      <p class="pl-8">{{example}}</p>
+    {{/each}}
+  </div>
+{{/if}}
+
+{{#if definition.synonyms}}
+  <div class="mb-2">
+    <span>Synonyms:</span>
+    {{#each definition.synonyms as |word|}}
+      <LinkTo
+        @route="word"
+        @model={{word}}
+        @linkTitle={{word}}
+        class="text-{{color}}-500 hover:bg-{{color}}-100 border-{{color}}-200 p-1 border rounded-lg"
+      />
+    {{/each}}
+  </div>
+{{/if}}
+
+{{#if definition.antonyms}}
+  <div class="mb-2">
+    <span>Antonyms:</span>
+    {{#each definition.antonyms as |word|}}
+      <LinkTo
+        @route="word"
+        @model={{word}}
+        @linkTitle={{word}}
+        class="text-{{color}}-500 hover:bg-{{color}}-100 border-{{color}}-200 p-1 border rounded-lg"
+      />
+    {{/each}}
+  </div>
+{{/if}}
+
+{{#if validGraphTypes}}
+  <div class="mb-2">
+    <span>Relationships <span class="text-sm">(click to visualize)</span>:</span>
+    {{#each validGraphTypes as |type|}}
+      <button {{action "selectGraphType" type}}
+        class="cursor-pointer text-{{color}}-500 hover:bg-{{color}}-100 border-{{color}}-200 p-1 border rounded-lg"
+      >
+        {{type.name}}
+      </button>
+    {{/each}}
+  </div>
+{{/if}}
+
+{{#if selectedGraphData}}
+  <Definition::Graph
+    @data={{selectedGraphData}}
+    @color={{color}}
+    class="w-full h-64 border border-dashed border-{{color}}-500 rounded"
+  />
+{{/if}}

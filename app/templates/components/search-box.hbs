@@ -1,8 +1,6 @@
-{{paper-input
-  class="search"
-  label="Search for a word..."
-  value=value
-  onChange=(action (mut value))
-  icon="search"
-  hideAllMessages=true
-}}
+<Input
+  @value={{value}}
+  @placeholder="Search for a word..."
+  @enter={{action "search"}}
+  class="border-b-2 {{if card "w-full" "bg-transparent text-white text-right"}}"
+/>

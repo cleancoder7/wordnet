@@ -1,14 +1,20 @@
-{{search-box word=model.word submit=(route-action 'searchWord')}}
+<div class="bg-gray-100 flex flex-col h-screen">
+  <nav class="p-4 bg-blue-700">
+    <div class="container flex items-center">
+      <LinkTo @route="index" class="text-white text-xl">WordNet</LinkTo>
+      <span class="flex-1"></span>
+      <SearchBox @word={{model.id}} @card={{false}} class="w-24"></SearchBox>
+    </div>
+  </nav>
 
-{{#each-in groupedDefinitions as |partOfSpeech definitions|}}
-  {{definition-card
-    word=model
-    partOfSpeech=partOfSpeech
-    definitions=definitions
-  }}
-{{else}}
-  <div class="card error">
-    <h1>Error</h1>
-    <p>Word not found.</p>
+  <div class="py-4 flex-1 overflow-y-auto">
+    {{#each-in model.definitionsByPartOfSpeech as |partOfSpeech definitions|}}
+      <Definition::Card
+        @word={{model}}
+        @partOfSpeech={{partOfSpeech}}
+        @definitions={{definitions}}
+      />
+    {{/each-in}}
   </div>
-{{/each-in}}
+</div>
+

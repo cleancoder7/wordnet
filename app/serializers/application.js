@@ -1,15 +1,14 @@
-import Ember from 'ember'
-import RESTSerializer from 'ember-data/serializers/rest'
-import { v4 } from 'ember-uuid'
+import RESTSerializer from "@ember-data/serializer/rest"
+import { v4 } from "ember-uuid"
+import { isPresent } from "@ember/utils"
 
 export default RESTSerializer.extend({
-  normalizeResponse(store, primaryModelClass, payload, id, requestType) {
+  normalizeResponse(store, primaryModelClass, payload, id)  {
     const normalizedResponse = {
       data: {
-        type: 'word',
-        id: v4(),
+        type: "word",
+        id: id,
         attributes: {
-          word: payload.word,
           frequency: payload.frequency,
           syllables: payload.syllables ? payload.syllables.list : [payload.word],
           pronunciation: payload.pronunciation,
@@ -27,18 +26,18 @@ export default RESTSerializer.extend({
       // payload.results is a list of definitions for the word.
       payload.results.forEach((d) => {
         // add each definition to the word's relationships
-        if (!Ember.isBlank(d.partOfSpeech)) {
+        if (isPresent(d.partOfSpeech)) {
           const uuid = v4() // generate a uuid for this definition
 
           const definition = {
-            type: 'definition',
+            type: "definition",
             id: uuid,
             attributes: d,
           }
 
           // add definition id to the relationships array
           normalizedResponse.data.relationships.definitions.data.push({
-            type: 'definition',
+            type: "definition",
             id: uuid,
           })
 
@@ -48,7 +47,6 @@ export default RESTSerializer.extend({
       })
     }
 
-    // console.log(normalizedResponse);
     return normalizedResponse
   },
 })

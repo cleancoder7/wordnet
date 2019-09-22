@@ -1,20 +1,19 @@
-import Ember from 'ember'
-const { Component, computed, get } = Ember
+import Component from "@ember/component"
+import { oneWay } from "@ember/object/computed"
+import { inject as service } from "@ember/service"
 
 export default Component.extend({
-  // Default properties
+  router: service(),
 
-  classNames: ['card'],
+  card: false,
 
-  // Computed properties
+  tagName: "",
 
-  value: computed.oneWay('word'),
+  value: oneWay("word"),
 
-  // Custom methods
-
-  keyPress(event) {
-    if (event.key === 'Enter') {
-      this.submit(get(this, 'value'))
+  actions: {
+    search(value) {
+      this.router.transitionTo("word", value)
     }
-  },
+  }
 })

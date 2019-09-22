@@ -1,16 +1,15 @@
-import RESTAdapter from 'ember-data/adapters/rest'
-import ENV from 'wordnet/config/environment'
+import RESTAdapter from "@ember-data/adapter/rest"
+import ENV from "wordnet/config/environment"
+import { computed } from "@ember/object"
 
 export default RESTAdapter.extend({
-  host: 'https://wordsapiv1.p.mashape.com',
+  host: "https://wordsapiv1.p.mashape.com",
 
-  headers: {
-    'X-Mashape-Key': ENV.APP.API_KEY,
-    'Accept': 'application/json',
-    'Cache-Control': 'public, max-age=86400',
-  },
-
-  urlForQueryRecord({ word }) {
-    return `${this.buildURL()}/words/${encodeURIComponent(word)}`
-  },
+  headers: computed(function() {
+    return {
+      "X-Mashape-Key": ENV.APP.API_KEY,
+      Accept: "application/json",
+      "Cache-Control": "public, max-age=86400",
+    }
+  }),
 })
