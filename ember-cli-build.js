@@ -11,7 +11,8 @@ const purgeCSS = {
       "./app/index.html",
       "./app/templates/**/*.hbs"
     ],
-    defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
+    defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || [],
+    whitelistPatterns: [/^text-\w+-500/, /^border-\w+-500/, /^border-\w+-200/, /^bg-\w+-100/],
   }
 }
 
